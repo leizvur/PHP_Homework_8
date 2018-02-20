@@ -1,0 +1,18 @@
+[{
+	"login": "Administrator",
+	"password": "P@ssw0rd",
+	"username": "Иванов Иван Иванович",
+	"is_admin": 1 
+},
+{
+	"login": "Operator",
+	"password": "123456789",
+	"username": "Петров Петр Петрович",
+	"is_admin": 0
+},
+{
+	"login": "User",
+	"password": "qwerty",
+	"username": "Сидоров Сидор Сидорович",
+	"is_admin": 0 
+}]
