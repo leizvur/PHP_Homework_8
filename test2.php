@@ -70,7 +70,7 @@ if ($test_number==="1")
 				echo "В точку!";?>
 				<form>
 					<p><input type="submit" formaction="list2.php" name="ShowTestList" value="Мне понравилось! Хочу еще тест!" title="Мне понравилось! Хочу еще тест!"></p>
-					//<p><input type="submit" formaction="certificate.php" name="GiveCertificate" value="Получить сертификат" title="Получить"></p>
+					 <p><input type="submit" formaction="certificate.php" name="GiveCertificate" value="Получить сертификат" title="Получить"></p>
 				</form> <?php
 			}
 
@@ -110,9 +110,10 @@ if ($test_number==="1")
 			if (!empty($_POST["answer"]) && $_POST["answer"]==="a2") 
 			{
 				echo "В точку!";?>
-				<p><form>
-					<input type="submit" formaction="list2.php" name="ShowTestList" value="Мне понравилось! Хочу еще тест!" title="Мне понравилось! Хочу еще тест!">
-				</form></p> <?php
+				<form>
+					<p><input type="submit" formaction="list2.php" name="ShowTestList" value="Мне понравилось! Хочу еще тест!" title="Мне понравилось! Хочу еще тест!"></p>
+					<p><input type="submit" formaction="certificate.php" name="GiveCertificate" value="Получить сертификат" title="Получить"></p>
+				</form> <?php
 			} 
 			if (!empty($_POST["answer"]) && $_POST["answer"]!="a2") 
 			{
@@ -150,9 +151,10 @@ if ($test_number==="1")
 				if (!empty($_POST["answer"]) && $_POST['answer']==="a1") 
 				{
 					echo "В точку!!";?>
-						<p><form>
-							<input type="submit" formaction="list2.php" name="ShowTestList" value="Мне понравилось! Хочу еще тест!" title="Мне понравилось! Хочу еще тест!">
-						</form></p> <?php
+						<form>
+							<p><input type="submit" formaction="list2.php" name="ShowTestList" value="Мне понравилось! Хочу еще тест!" title="Мне понравилось! Хочу еще тест!"></p>
+							 <p><input type="submit" formaction="certificate.php" name="GiveCertificate" value="Получить сертификат" title="Получить"></p>
+						</form><?php
 
 				} 
 				if (!empty($_POST["answer"]) && $_POST["answer"]!="a1") 

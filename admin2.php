@@ -1,8 +1,8 @@
 <?php
 session_start();
-echo "<pre>";
-print_r($_SESSION["user"]);
-echo "</pre>";
+//echo "<pre>";
+//print_r($_SESSION["user"]);
+//echo "</pre>";
 
 if (empty($_SESSION["user"]) || $_SESSION["user"]["is_admin"]!=1) 
 {
@@ -63,7 +63,7 @@ if (isset($_FILES["mytest"]["name"]) && !empty($_FILES["mytest"]["name"]))
 		if ($_FILES["mytest"]["error"] == UPLOAD_ERR_OK)	
 			{
 				move_uploaded_file($_FILES["mytest"]["tmp_name"], "uploaded/".basename($_FILES["mytest"]["name"]));
-				header('Location: list1.php');
+				//header('Location: list2.php');
 				echo "Тест загружен на сервер.";
 				echo "<h3>Информация о загруженном на сервер файле: </h3>";
 				echo "<p><strong>Оригинальное имя загруженного файла:</strong> ".$_FILES['mytest']['name']."</p>";
@@ -74,7 +74,7 @@ if (isset($_FILES["mytest"]["name"]) && !empty($_FILES["mytest"]["name"]))
 				//var_dump($shortfilepath);
 
 ?>
-				<input type="submit" formaction="list2.php" value="Выбрать тест"><br><br>
+				<input type="submit" formaction="list2.php" value="Пройти тестирование"><br><br>
 <?php			
 			}
 		else
@@ -85,8 +85,7 @@ if (isset($_FILES["mytest"]["name"]) && !empty($_FILES["mytest"]["name"]))
 	}
 	
 ?>
-	
+
 </form>
 </body>
 </html>
-?>

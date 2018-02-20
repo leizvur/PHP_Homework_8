@@ -48,24 +48,7 @@ foreach ($test_array as $value)
 	<h1>Тесты на рожденных в СССР</h1>
 	<p>Дорогой друг!</p>
 	<p>Если ты ответишь на все три теста правильно, знай, ты рожден в СССР.</p>
-
-
-	<?php
-	//var_dump($_POST);
-	if (empty($_POST["myname"])) 
-	{
-		http_response_code(400);
-		echo "Давай знакомиться! Введи свое имя в поле выше.";?>
-		<form enctype="multipart/form-data" method="POST">
-		<p><label><strong>Введи свое имя:</strong></label></p>
-		<p><input type="text" name="myname" placeholder="Человек-невидимка" required></p>
-		<p><input type="submit" formaction="list2.php" name="RememberMyName" value="OK"></p>
-		</form><?php
-	} 
-	else 
-	{
-		http_response_code(200);?>
-		<form enctype="multipart/form-data" method="GET">
+	<form enctype="multipart/form-data" method="GET">
 		<p><label><strong>Выбери тест:</strong></label></p>
 		<input type="radio" name="mytest" value="1" checked>Политический тест<br><br>
 		<input type="radio" name="mytest" value="2">Литературный тест<br><br>
@@ -75,9 +58,5 @@ foreach ($test_array as $value)
 	
 	<p>Желаем удачи!</p>
 </body>
-</html><?php
-	}
-	
-	
-	?>
+</html>
 	
