@@ -5,29 +5,49 @@ ini_set("display_errors", 1);
 session_start();
 $errorlog=[];
 
+//var_dump($_POST);
+
 if (!empty($_POST)) 
 {
-	$users_json=file_get_contents(__DIR__ . "/login.json");
-	$users_array=json_decode($users_json, true);
-	
-	foreach ($users_array as $user)
+	if ($_POST["Guest"]=="Guest") 
+	{	
+		$_SESSION["user"]="Guest";
+		var_dump($_SESSION["user"]);
+		header('Location: list2.php');
+	} 
+	else
 	{
-		if ($_POST["Login"]==$user["login"] && $_POST["Password"]==$user["password"] && $user["is_admin"]!=1) 
+		$users_json=file_get_contents(__DIR__ . "/login.json");
+		$users_array=json_decode($users_json, true);
+	
+		foreach ($users_array as $user)
 		{
-			$_SESSION["user"]=$user;
-			header('Location: list2.php');
-		}
-		elseif ($_POST["Login"]==$user["login"] && $_POST["Password"]==$user["password"] && $user["is_admin"]=1) 
-		{
-			$_SESSION["user"]=$user;
-			header('Location: admin2.php');
+			if ($_POST["Login"]==$user["login"] && $_POST["Password"]==$user["password"] && $user["is_admin"]!=1 && $_POST["Guest"]!=="Guest") 
+			{
+				$_SESSION["user"]=$user;
+				header('Location: list2.php');
+			}
+			elseif ($_POST["Login"]==$user["login"] && $_POST["Password"]==$user["password"] && $user["is_admin"]=1 && $_POST["Guest"]!=="Guest") 
+			{
+				$_SESSION["user"]=$user;
+				header('Location: admin2.php');
+				}
+			elseif ($_POST["Guest"]!=="Guest" && $_POST["Login"]!==$user["login"] && $_POST["Password"]!==$user["password"]) 
+			{
+				echo "<pre>";
+				print_r("Вы ввели неверный логин или пароль.");
+				echo "</pre>";
+				$errorlog[]="Пользователь ввел неверный логин или пароль!";
+			}
+			
 		}
 	}
-	echo "<pre>";
-	print_r("Вы ввели неверный логин и\или пароль.");
-	echo "</pre>";
-	$errorlog[]="Пользователь ввел неверный логин и\или пароль!";
 }
+
+else {
+	# code...
+}
+
 
 	
 ?>
@@ -43,6 +63,7 @@ if (!empty($_POST))
 		<input type="text" name="Login" placeholder="Логин" required></p>
 	<p><label>Пароль:</label>
 		<input type="text" name="Password" placeholder="Пароль"></p>
+	<p><input type="checkbox" name="Guest" value="Guest"><label>Я гость</label></p>	
 	<input type="submit" name="enter" value="Войти">
 </form>
 </body>

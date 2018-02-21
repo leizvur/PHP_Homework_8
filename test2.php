@@ -5,14 +5,14 @@
 	<title></title>
 </head>
 <body>
-<h1>Выберите один ответ на вопрос</h1>
+<h1>Выбери один ответ на вопрос</h1>
 
 <?php
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-
-//echo "<pre>";
+session_start();
+//var_dump($_SESSION["user"]);
 //var_dump($_GET);
 //var_dump($_POST);
 //echo "</pre>";
@@ -21,6 +21,9 @@ $test_number;
 $test1_array=[];
 $test2_array=[];
 $test3_array=[];
+
+
+
 
 //Шаг 1. Проверка номера теста
 
@@ -33,17 +36,17 @@ if (isset($_GET["mytest"]) && !empty($_GET["mytest"]))
 	}
 	else 
 	{
-		echo "Вы не выбрали тест.";
+		echo "Ты не выбрал тест.";
 	}
 
 
 //Шаг 2. Загрузка соответствующего номеру json в массив
 $test_number;
 
-if ($test_number==="1") 
+if ($test_number==="1" && file_exists("./uploaded/test$test_number.json")) 
 	{
 		//echo "Первый тест";
-		$test1_content=file_get_contents("./uploaded/test1.json");
+		$test1_content=file_get_contents("./uploaded/test$test_number.json");
 		$test1_array=json_decode($test1_content, true);
 		//echo "<pre>";
 		//print_r($test1_array);
@@ -70,7 +73,7 @@ if ($test_number==="1")
 				echo "В точку!";?>
 				<form>
 					<p><input type="submit" formaction="list2.php" name="ShowTestList" value="Мне понравилось! Хочу еще тест!" title="Мне понравилось! Хочу еще тест!"></p>
-					 <p><input type="submit" formaction="certificate.php" name="GiveCertificate" value="Получить сертификат" title="Получить"></p>
+					<p><input type="submit" formaction="certificate.php" name="GiveCertificate" value="Получить сертификат" title="Получить"></p>
 				</form> <?php
 			}
 
@@ -84,10 +87,10 @@ if ($test_number==="1")
 		}
 	} 
 	
-	elseif ($test_number==="2") 
+	elseif ($test_number==="2" && file_exists("./uploaded/test$test_number.json")) 
 		{
 			//echo "Второй тест";
-			$test2_content=file_get_contents("./uploaded/test2.json");
+			$test2_content=file_get_contents("./uploaded/test$test_number.json");
 			$test2_array=json_decode($test2_content, true);
 			//echo "<pre>";
 			//print_r($test2_array);
@@ -125,10 +128,11 @@ if ($test_number==="1")
 			}
 			
 		}
-		elseif ($test_number==="3")
+		elseif ($test_number==="3" && file_exists("./uploaded/test$test_number.json"))
 			{
-				//echo "Третий тест";
-				$test3_content=file_get_contents("./uploaded/test3.json");
+				echo "Третий тест";
+
+				$test3_content=file_get_contents("./uploaded/test$test_number.json");
 				$test3_array=json_decode($test3_content, true);
 				//echo "<pre>";
 				//print_r($test3_array);
@@ -169,7 +173,8 @@ if ($test_number==="1")
 			} 
 			else
 			{
-				http_response_code(404);
+				echo "Тест не найден. Обратись к администратору системы.";
+				//http_response_code(404);
 			}
 
 ?>

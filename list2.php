@@ -3,8 +3,29 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+session_start();
+//echo "<pre>";
+//print_r($_SESSION["user"]);
+//echo "</pre>";
+
 $dir="uploaded";
 $test_array=[];
+$files=[];
+
+if (is_dir($dir)) 
+{
+	$files=scandir($dir);
+	array_shift($files); 
+    array_shift($files);
+	//echo "Нашлись следующие файлы в папке:", PHP_EOL;
+	//echo "<pre>";
+	//print_r($files);
+	//echo "</pre>";
+}
+else
+{
+	echo "Файлы тестов не загружены в Систему тестирования! Обратитесь к администратору системы.";
+}
 
 if (is_dir($dir)) 
 {
@@ -46,14 +67,50 @@ foreach ($test_array as $value)
 </head>
 <body>
 	<h1>Тесты на рожденных в СССР</h1>
+	<?php 
+	?>
 	<p>Дорогой друг!</p>
-	<p>Если ты ответишь на все три теста правильно, знай, ты рожден в СССР.</p>
+	<?php
+			if ($_SESSION["user"]=="Guest") 
+			{
+				echo "Как гость, ты можешь ознакомиться со списком тестов в системе! Пройти тесты могут только зарегистрированные пользователи.";
+				
+			} 
+			else 
+			{ ?> 
+				<p>Если ты ответишь на все три теста правильно, знай, ты рожден в СССР.</p>
+			<?php
+			}
+		?>
+	
 	<form enctype="multipart/form-data" method="GET">
+		<?php
+			if ($_SESSION["user"]=="Guest") 
+			{
+							
+			} 
+			else 
+			{ ?> 
 		<p><label><strong>Выбери тест:</strong></label></p>
-		<input type="radio" name="mytest" value="1" checked>Политический тест<br><br>
-		<input type="radio" name="mytest" value="2">Литературный тест<br><br>
-		<input type="radio" name="mytest" value="3">Юмористический тест<br><br>
-		<p><input type="submit" formaction="test2.php" name="RunTest" value="Пройти тест"></p>
+			<?php
+			}
+			?>
+		<p><input type="radio" name="mytest" value="1" checked>Политический тест</p>
+		<p><input type="radio" name="mytest" value="2">Литературный тест</p>
+		<p><input type="radio" name="mytest" value="3">Юмористический тест</p>
+		<?php
+			if ($_SESSION["user"]=="Guest") 
+			{
+				//echo "Недостаточно прав для прохождения теста! Обратитесь к администратору системы.";
+				exit;
+			} 
+			else 
+			{ ?> 
+				<p><input type="submit" formaction="test2.php" name="RunTest" value="Пройти тест"></p>
+			<?php
+			}
+		?>
+		
 	</form>
 	
 	<p>Желаем удачи!</p>

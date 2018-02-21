@@ -7,7 +7,7 @@ session_start();
 if (empty($_SESSION["user"]) || $_SESSION["user"]["is_admin"]!=1) 
 {
 	echo "Недостаточно прав для доступа к этой странице! Обратитесь к администратору системы.";
-	//http_response_code(403);
+	http_response_code(403);
 	exit;
 } 
 else 
