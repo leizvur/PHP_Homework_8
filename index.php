@@ -44,11 +44,6 @@ if (!empty($_POST))
 	}
 }
 
-else {
-	# code...
-}
-
-
 	
 ?>
 <!DOCTYPE html>
